@@ -1,11 +1,9 @@
 import { createStore } from 'redux';
 
-const reducer = (state = 0, action) => {
+const reducer = (state = {books: []}, action) => {
   switch (action.type) {
-    case 'INCREMENT':
-      return state + 1;
-    case 'DECREMENT':
-      return state - 1;
+    case 'ADD_BOOK':
+      return { books: [ ...state.books, ...action.payload ] };
     default:
       return state;
   }
@@ -17,10 +15,23 @@ store.subscribe(() => {
   console.log('Current State:', store.getState());
 });
 
-store.dispatch({ type: 'NOTHING' });
-store.dispatch({ type: 'INCREMENT' });
-store.dispatch({ type: 'INCREMENT' });
-store.dispatch({ type: 'INCREMENT' });
-store.dispatch({ type: 'DECREMENT' });
-store.dispatch({ type: 'DECREMENT' });
-store.dispatch({ type: 'DECREMENT' });
+store.dispatch({
+  type: 'ADD_BOOK',
+  payload: [{
+    id: 1,
+    title: 'Book One'
+  }]
+});
+store.dispatch({
+  type: 'ADD_BOOK',
+  payload: [
+    {
+      id: 2,
+      title: 'Book Two'
+    },
+    {
+      id: 3,
+      title: 'Book Three'
+    }
+  ]
+});
