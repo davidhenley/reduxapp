@@ -2,4 +2,4 @@
 
 `npm install` or `yarn install`
 
-`yarn run start`
+`npm start` or `yarn run start`
